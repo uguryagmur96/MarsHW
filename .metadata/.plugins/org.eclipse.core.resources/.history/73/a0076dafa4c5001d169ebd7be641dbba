@@ -1,0 +1,175 @@
+package marsHomeWork;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class HW {
+	
+	public void dosyaOlustur() {
+		File file=new File("Mars.txt");
+		try {
+			System.out.println("Dosya oluşturuluyor");
+			file.createNewFile();
+			System.out.println("Dosya oluşturuldu!");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void dosyayaYaz() {
+		BufferedWriter writer=null;
+		String text="Korkma, sönmez bu şafaklarda yüzen al sancak;\r\n"
+				+ "Sönmeden yurdumun üstünde tüten en son ocak.\r\n"
+				+ "O benim milletimin yıldızıdır parlayacak;\r\n"
+				+ "O benimdir, o benim milletimindir ancak.\r\n"
+				+ "\r\n"
+				+ "Çatma, kurban olayım çehreni ey nazlı hilal!\r\n"
+				+ "Kahraman ırkıma bir gül! ne bu şiddet bu celal?\r\n"
+				+ "Sana olmaz dökülen kanlarımız sonra helal,\r\n"
+				+ "Hakkıdır, Hak'ka tapan, milletimin istiklal!\r\n"
+				+ "\r\n"
+				+ "Ben ezelden beridir hür yaşadım, hür yaşarım.\r\n"
+				+ "Hangi çılgın bana zincir vuracakmış? Şaşarım;\r\n"
+				+ "Kükremiş sel gibiyim, bendimi çiğner aşarım;\r\n"
+				+ "Yırtarım dağları, enginlere sığmam, taşarım.\r\n"
+				+ "\r\n"
+				+ "Garbın afakını sarmışsa çelik zırhlı duvar,\r\n"
+				+ "Benim iman dolu göğsüm gibi serhaddim var.\r\n"
+				+ "Ulusun, korkma! Nasıl böyle bir imanı boğar.\r\n"
+				+ "Medeniyyet! dediğin tek dişi kalmış canavar?\r\n"
+				+ "\r\n"
+				+ "Arkadaş! Yurduma alçakları uğratma sakın! \r\n"
+				+ "Siper et gövdeni, dursun bu hayasızca akın.\r\n"
+				+ "Doğacaktır sana vaadettiği günler Hak'kın;\r\n"
+				+ "Kimbilir, belki yarın, belki yarından da yakın.\r\n"
+				+ "\r\n"
+				+ "Bastığın yerleri toprak diyerek geçme, tanı!\r\n"
+				+ "Düşün, altında binlerce kefensiz yatanı.\r\n"
+				+ "Sen şehit oğlusun, incitme, yazıktır atanı;\r\n"
+				+ "Verme, dünyaları alsan da bu cennet vatanı.\r\n"
+				+ "\r\n"
+				+ "Kim bu cennet vatanın uğruna olmaz ki feda?\r\n"
+				+ "Şüheda fışkıracak toprağı sıksan, şüheda!\r\n"
+				+ "Canı, cananı, bütün varımı alsın da Hüda,\r\n"
+				+ "Etmesin tek vatanımdan beni dünyada cüda.\r\n"
+				+ "\r\n"
+				+ "Ruhumun senden, ilahi şudur ancak emeli;\r\n"
+				+ "Değmesin mabedimin göğsüne na-mahrem eli!\r\n"
+				+ "Bu ezanlar ki şahadetleri dinin temeli,\r\n"
+				+ "Ebedi yurdumun üstünde benim inlemeli\r\n"
+				+ "\r\n"
+				+ "O zaman vecd ile bin secde eder varsa taşım;\r\n"
+				+ "Her cerihamdan, ilahi, boşanıp kanlı yaşım,\r\n"
+				+ "Fışkırır ruh-i mücerret gibi yerden naşım;\r\n"
+				+ "O zaman yükselerek arşa değer belki başım!\r\n"
+				+ "\r\n"
+				+ "Dalgalan sen de şafaklar gibi ey şanlı hilal;\r\n"
+				+ "Olsun artık dökülen kanlarımın hepsi helal!\r\n"
+				+ "Ebediyyen sana yok, ırkıma yok izmihlal.\r\n"
+				+ "Hakkıdır, hür yaşamış bayrağımın hürriyet;\r\n"
+				+ "Hakkıdır, Hak'ka tapan milletimin istiklal!";
+		
+		try {
+			writer=new BufferedWriter(new FileWriter("mars.txt",true));
+			writer.write(text);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				writer.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public void lineCounter() {
+		BufferedReader reader=null;
+		int lines=0;
+		try {
+			reader=new BufferedReader(new FileReader("mars.txt"));
+			try {
+				while(reader.readLine()!=null) {
+					lines++;
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println("Toplam satır sayısı: " + lines);
+	}
+	
+	public void wordCounter() throws IOException {
+		int words=0;
+		String[] wordArray=null;
+		String s= null;
+		try(Scanner scan=new Scanner(new FileReader("mars.txt"))){
+			while(scan.hasNextLine()) {
+				s=scan.nextLine();
+				wordArray=s.split(" ");
+				words= words+wordArray.length;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Kelime sayısı: " + words);
+	}
+	public void characterCounter() throws IOException {
+		int words=0;
+		String[] wordArray=null;
+		String s= null;
+		String n=null;
+		try(BufferedReader reader=new BufferedReader(new FileReader("mars.txt"))){
+			while((s=reader.readLine())!=null) {
+				n=s.trim();
+				
+				words+=n.length();
+				
+				
+//				wordArray=s.split(" ");
+//				words= words+wordArray.length;
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Karakter sayısı: " + words);
+	}
+	
+	
+
+	public static void main(String[] args) throws IOException {
+		HW hw=new HW();
+		//hw.dosyaOlustur();
+		//hw.dosyayaYaz();
+		hw.lineCounter();
+		hw.wordCounter();
+		hw.characterCounter();
+
+	}
+
+}
